@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="stylesheet" type="text/css" href="signup.css">
+ <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-analytics.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.6.3-2021425213031/firebase-firestore.memory.min.js" integrity="sha512-tE9jekPQfuw8YEUMxs1JF3f85z5OQzwOI7ff13cfBwVe8i+INiuw1UjkOpitsYejfe+qEUsjEW3l4ZA/Doo2cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.6.3-2021425213031/firebase-firestore.min.js" integrity="sha512-82PySJ6oO7mW3/mheHb/E1pkI5r+O1r4qwGkwYv/tnuAhhQoaiyT4TGeeWIc6iepw0le0fPczYuOPIZ1kpSpOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.6.3-2021425213031/firebase-database.min.js" integrity="sha512-dHQ1Vt/XDwiMebJH/Gt4zPqTcvHxksApxKnXfwc43KjxYCfdrShRkgvIKK5k+q2KE7ZszYgUohMKAVZk7+QA1A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.6.3-2021425213031/firebase-auth.min.js" integrity="sha512-6m3S4nIZ1WkdLjsOILbpX56yMAyfTpoBqOj6qFGl6AJBFMLo5pObIdGP/9sWUO4fgSGlxTQ4KuylS5nh9/asFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  
+</head>
+<body>
+
+
+  <nav class="navbar">
+        <div class="max-width1">
+            <div class="logo"><a href="#">H -<span>Pad</span></a></div>
+            <ul class="menu">
+                <li><a href="H-Padd.html" class="menu-btn">Home</a></li>
+                <li><a href="signup.html" class="menu-btn">Login</a></li>
+                <li><a href="signup.html" class="menu-btn">Sign-Up</a></li>
+            </ul>
+        </div>
+    </nav>
+  <main class="center">
+    <h1>Login</h1>
+      <form id="signUpForm" onsubmit="return false;">
+	      <div class="max-width">
+	         <div class="field email"> 
+              <input id="email" type="email" placeholder="Enter your email here.."
+              onkeydown="validation()"><span class="text"></span>
+              <label>Username</label>
+	         </div>
+	         <div class="field password"> 
+              <input id="password" type="password" placeholder="Create a password.."><label>Password</label>
+	         </div>
+	         <button type="submit" onclick="signUp()">Sign-up</button>
+	         <button type="submit" onclick="signIn()">Sign-in</button>
+	         <a href="#">Forget Password</a>
+        </div>
+	   </form>
+   </main>
+<script>
+  
+  
+  
+      var firebaseConfig = {
+    apiKey: "AIzaSyC_RkAzO6cjZxh3kVmJc4H98UB0iHTPupM",
+    authDomain: "ecstatic-emblem-310003.firebaseapp.com",
+    projectId: "ecstatic-emblem-310003",
+    storageBucket: "ecstatic-emblem-310003.appspot.com",
+    messagingSenderId: "370455876253",
+    appId: "1:370455876253:web:a591da6a7f34164fc1ba74",
+    measurementId: "G-K5VNWCR65X"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);  
+  const auth=firebase.auth();
+  
+  
+  function signUp()
+   {
+     var email=document.getElementById("email");
+     var password=document.getElementById("password");
+  
+     const promise=auth.createUserWithEmailAndPassword(email.value,password.value);
+     promise.catch( e =>{alert(e.message);});
+  
+     alert("Signed Up");
+   }
+   
+   function signIn()
+   {
+     var email=document.getElementById("email");
+     var password=document.getElementById("password");
+  
+     const promise=auth.signInWithEmailAndPassword(email.value,password.value);
+     promise.catch( e =>{alert(e.message);});
+  
+     alert("Signed In as :"+email.value);
+   }
+   
+   
+   
+   auth.onAuthStateChanged(function(user){
+       
+	   if(user)
+	   {
+	     var email=user.email;
+		 alert("Active User : "+email);
+		 window.location = 'index.html';
+	   }
+	   else
+	   {
+	     alert("No active user");
+	   }
+	   
+   });
+   
+   
+  
+  </script>
+  
+
+  <script type="text/javascript">
+    function validation(){
+
+var form=document.getElementById('form');
+var email=document.getElementById('email').value;
+var text=document.getElementById('text');
+var pattern=/^[^]+@[^]+\.[a-z]{2,3}$/
+
+if(email.match(pattern))
+{
+  form.classList.add("valid");
+  form.classList.remove("invalid");
+  text.innerHTML="Valid E-mail"
+  text.style.color="green";
+}
+else{
+  
+      form.classList.remove("valid");
+      form.classList.add("invalid");
+      text.innerHTML="invalid email";
+      text.style.color="red";
+
+}
+}
+  </script>
+  
+</body>
+</html>

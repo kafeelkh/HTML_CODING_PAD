@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-analytics.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.6.3-2021425213031/firebase-firestore.memory.min.js" integrity="sha512-tE9jekPQfuw8YEUMxs1JF3f85z5OQzwOI7ff13cfBwVe8i+INiuw1UjkOpitsYejfe+qEUsjEW3l4ZA/Doo2cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.6.3-2021425213031/firebase-firestore.min.js" integrity="sha512-82PySJ6oO7mW3/mheHb/E1pkI5r+O1r4qwGkwYv/tnuAhhQoaiyT4TGeeWIc6iepw0le0fPczYuOPIZ1kpSpOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.6.3-2021425213031/firebase-database.min.js" integrity="sha512-dHQ1Vt/XDwiMebJH/Gt4zPqTcvHxksApxKnXfwc43KjxYCfdrShRkgvIKK5k+q2KE7ZszYgUohMKAVZk7+QA1A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.6.3-2021425213031/firebase-auth.min.js" integrity="sha512-6m3S4nIZ1WkdLjsOILbpX56yMAyfTpoBqOj6qFGl6AJBFMLo5pObIdGP/9sWUO4fgSGlxTQ4KuylS5nh9/asFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  
+	
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>H-pad</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+
+	<!-- Owl Carousel -->
+	<link type="text/css" rel="stylesheet" href="css/owl.carousel.css" />
+	<link type="text/css" rel="stylesheet" href="css/owl.theme.default.css" />
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+
+	<!-- Magnific Popup -->
+	<!--<link type="text/css" rel="stylesheet" href="css/magnific-popup.css" />
+
+	<!-- Font Awesome Icon -->
+	<!--<link rel="stylesheet" href="css/font-awesome.min.css">
+
+	<!-- Custom stlylesheet -->
+	
+	<link type="text/css" rel="stylesheet" href="css/style.css" />
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	
+	
+	<style>
+	
+	 #main_cheez
+	 {
+	   display:grid;
+	   grid-template-columns:1fr 1fr;
+	 
+	   position:relative;
+	   width:100%;
+	   padding:10px;
+	   
+	 }
+	 
+	 #main_cheez #txt_area
+	 {
+        height:470px;	
+        background-color:pink;	
+        font-size:18px;	
+        resize:none;
+	 }
+	 
+	 #main_cheez #frame
+	 {
+	   margin-left:10px;
+	   width:100%;
+	   height:470px;
+	   margin-right:0px;
+	   background-color:white;
+	 }
+	 
+	 
+	#sign-out
+	{
+	  height:60px;
+	  width:250px;
+	  color:black;
+	}
+	
+	#Download_button
+	{
+	  height:60px;
+	  width:250px;
+	  color:black;
+	  padding:0 px;
+	}
+	 
+	 #btn
+	 {
+	  
+	  height:60px;
+	  width:250px;
+	  color:black;
+	  
+	 }
+	 
+	 #stop_btn
+	 {
+	  
+	  height:60px;
+	  width:250px;
+	  color:black;
+	  
+	 }
+	 
+	 .emojis{
+	 
+	    font-size:42px;
+		color:red;
+	 
+	 }
+	 
+	 
+	 #buttons_section
+	 {
+	    position:absolute;
+		left:185px;
+	 }
+	 
+	 
+
+	 
+	 
+	 
+	 @keyframes gradient {
+  0% {
+    background: radial-gradient(circle at center, rgba( 255, 125 , 125, 0 ) 0%, #fff 0%, #fff 100%);
+  }
+  25% {
+    background: radial-gradient(circle at center, rgba( 255, 125, 125, 0.3 ) 24%, #fff 25%, #fff 100%);
+  }
+  50% {
+    background: radial-gradient(circle at center, rgba( 255, 125, 125, 0.5 ) 49%, #fff 50%, #fff 100%);
+  }
+  75% {
+    background: radial-gradient(circle at center, rgba( 255, 125, 125, 0.8 ) 74%, #fff 75%, #fff 100%);
+  }
+  100% {
+    color: #fff;
+    background: radial-gradient(circle at center, #f88 99%, #fff 100%, #fff 100%);
+  }
+}
+
+
+#btn:active {
+  /* set time duration to your needs */
+  animation: gradient 100ms;
+  background: #f88;
+  color: #fff;
+  box-shadow: none;
+}
+	 
+	 
+	
+	</style>
+	
+	
+	
+</head>
+
+<body>
+	<!-- Header -->
+	<header id="home">
+		<!-- Background Image -->
+		<div class="bg-img" style="background-image: url('./img/background1.jpg');">
+			<div class="overlay"></div>
+		</div>
+		<!-- /Background Image -->
+
+		<!-- Nav -->
+		<nav id="nav" class="navbar nav-transparent">
+			<div class="container">
+
+				<div class="navbar-header">
+					<!-- Logo -->
+					<div class="navbar-brand">
+						<a href="index.html">
+							<!--<img class="logo" src="img/logo.png" alt="logo">-->
+						  <!--	<img class="logo-alt" src="img/logo-alt.png" alt="logo">-->
+						  
+						  <img src="img/hplogo.png" height="50px" >
+						  
+						</a>
+						
+						
+					   
+					 <span style="color:white">You speak,we code!! </span>
+					
+					  
+					 
+					  
+					</div>
+					<!-- /Logo -->
+
+					<!-- Collapse nav button -->
+					<div class="nav-collapse">
+						<span></span>
+					</div>
+					<!-- /Collapse nav button -->
+				</div>
+
+               <section id="main_cheez">
+                 <textarea id="txt_area" placeholder="Code will be shown here!"  onkeyup="run();fun();" > </textarea>
+				 <iframe id="frame"> </iframe>
+               </section>
+			   
+			   
+			   
+			   <section id="buttons_section">
+			   
+			   
+			    <button id="sign-out" onclick="signOut();">Sign Out
+                           <span class="emojis"> ⬅  </span>
+                </button>
+				 
+               
+                <button id="btn" onclick="recognition.start()">Start Voice Coding
+                           <span class="emojis"> 🗣️ </span>
+                </button>
+				
+				
+				  <button id="stop_btn" onclick="recognition.stop()">Stop Voice Coding
+                           <span class="emojis"> 🤐 </span>
+                </button>
+				
+				
+				
+				<button id="Download_button" >Download
+                           <span class="emojis"> 📥</span>
+                </button>
+				
+
+			   </section>
+			   
+				<!--  Main navigation  -->
+			<!--	<ul class="main-nav nav navbar-nav navbar-right">
+					<li><a href="#home">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#portfolio">Portfolio</a></li>
+					<li><a href="#service">Services</a></li>
+					<li><a href="#pricing">Prices</a></li>
+					<li><a href="#team">Team</a></li>
+					<li class="has-dropdown"><a href="#blog">Blog</a>
+						<ul class="dropdown">
+							<li><a href="blog-single.html">blog post</a></li>
+						</ul>
+					</li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+				<!-- /Main navigation -->
+            
+			</div>
+		</nav>
+		<!-- /Nav -->
+
+
+
+	</header>
+	<!-- /Footer -->
+
+	
+	
+	
+	
+
+	<!-- jQuery Plugins -->
+	<script src="script.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/owl.carousel.min.js"></script>
+	<script type="text/javascript" src="js/jquery.magnific-popup.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	
+	
+	<script>
+	
+	
+	   
+    var firebaseConfig = {
+    apiKey: "AIzaSyC_RkAzO6cjZxh3kVmJc4H98UB0iHTPupM",
+    authDomain: "ecstatic-emblem-310003.firebaseapp.com",
+    projectId: "ecstatic-emblem-310003",
+    storageBucket: "ecstatic-emblem-310003.appspot.com",
+    messagingSenderId: "370455876253",
+    appId: "1:370455876253:web:a591da6a7f34164fc1ba74",
+    measurementId: "G-K5VNWCR65X"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);  
+  const auth=firebase.auth();
+  
+	
+	//get the current user to sign out beta
+	
+	console.log(auth.currentUser);
+	
+	 function signOut()
+	 {
+	    alert("Signed Out");
+	    auth.signOut();
+		window.location="H-padd.html";
+	 }
+	
+	
+	</script>
+	
+	
+ <script>
+    function download(filename, text) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+       element.style.display = 'none';
+       document.body.appendChild(element);
+       element.click();
+       document.body.removeChild(element);
+   }
+
+   // Start file download.
+   document.getElementById("Download_button").addEventListener("click", function(){
+        // Generate download of hello.txt file with some content
+       var text = document.getElementById("txt_area").value;
+	   
+	   
+text="<!DOCTYPE html>\n<html lang='en'>\n<head><meta charset='UTF-8'>\n<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n <meta name='viewport' content='width=device-width, initial-scale=1.0'>  \n <title>Document</title>\n</head>"+"\n"+"<body>"+"\n"+text+"\n"+"</body>\n</html>";
+	    
+		
+
+		
+       var filename =prompt("Give your HTML file a name👇👇");
+	   if(filename!=null)
+	   {
+	    if(!filename.includes("."))
+		{
+		 
+		 filename+=".html";
+         download(filename,text);
+		
+		
+ var msg = new SpeechSynthesisUtterance();
+ msg.text = "Your HTML file, has been downloaded ,successfully, check your download folder.";
+ var voices = window.speechSynthesis.getVoices();
+ msg.lang="en-US";
+ msg.rate=1;
+ msg.volume=1;
+ msg.pitch=0;
+msg.voice = voices[56];
+ window.speechSynthesis.speak(msg);
+  //msg.lang="hi-IN";
+   // msg.text = "Aap ki HTML file ko download kar diya gaya hai, ,kripya apne download folder ko check karein...";
+  // window.speechSynthesis.speak(msg);
+		
+		} 
+	    else
+	    {
+	     alert("Dont add extensions!!🤚 \n H-pad itself add extension for your ease!!😀😀");
+	    }
+	   }
+	   	
+	   
+   }, false);
+</script>
+
+
+</body>
+
+</html>
